@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <!-- Configuración de caracteres para soportar tildes y caracteres especiales -->
+    <meta charset="UTF-8" />
+    <!-- Configuración para diseño responsivo en dispositivos móviles -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tinder Swipe</title>
+    <!-- Enlace al archivo de estilos CSS -->
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <!-- Contenedor con sombra para resaltar la interfaz -->
+    <div class="shadow">
+      <main>
+        <section>
+          <!-- Fondo blanco para mejorar la visibilidad del contenido -->
+          <div class="white-bkg"></div>
+
+          <!-- Encabezado con el logo de Tinder -->
+          <header>
+            <img src="./img/tinder-logo.webp" alt="Tinder Logo" />
+          </header>
+
+          <!-- Contenedor de las tarjetas de perfil -->
+          <div class="cards">
+            <!-- Tarjeta de perfil 1 -->
+            <article>
+              <img src="./img/Dave.PNG" alt="Dave Mustaine" />
+              <h2>Dave<span>63</span></h2>
+              <!-- Indicadores de elección al deslizar -->
+              <div class="choice nope">NOPE</div>
+              <div class="choice like">LIKE</div>
+            </article>
+
+            <!-- Tarjeta de perfil 2 -->
+            <article>
+              <img src="./img/Jennifer.jpg" alt="Jennifer Aniston" />
+              <h2>Jennifer<span>56</span></h2>
+              <!-- Indicadores de elección al deslizar -->
+              <div class="choice nope">NOPE</div>
+              <div class="choice like">LIKE</div>
+            </article>
+
+            <!-- Mensaje cuando no hay más perfiles disponibles -->
+            <span>
+              No hay más personas cerca de ti...<br />
+              Vuelve a intentarlo más tarde
+            </span>
+          </div>
+
+          <!-- Botones de interacción en la parte inferior -->
+          <footer>
+            <button class="is-undo" aria-label="Deshacer"></button>
+            <button class="is-remove is-big" aria-label="Rechazar"></button>
+            <button class="is-star" aria-label="Favorito"></button>
+            <button class="is-fav is-big" aria-label="Me gusta"></button>
+            <button class="is-zap" aria-label="Super like"></button>
+          </footer>
+        </section>
+      </main>
+    </div>
+
+    <!-- Inclusión del archivo JavaScript para manejar la interactividad -->
+    <script src="/app.js"></script>
+  </body>
+</html>

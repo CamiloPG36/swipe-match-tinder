@@ -1,0 +1,250 @@
+/* 
+  Reset CSS para establecer un punto de partida consistente en todos los navegadores.
+  Se eliminan márgenes y rellenos predeterminados, y se establece el modelo de caja.
+*/
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* 
+  Estilos generales del cuerpo de la página 
+*/
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif; /* Fuentes del sistema */
+  display: grid; /* Centra el contenido */
+  place-content: center;
+  min-height: 100vh; /* Ocupa toda la altura de la ventana */
+  overflow: hidden; /* Evita el scroll */
+  user-select: none; /* Impide la selección de texto */
+  background: #e5e5e5; /* Color de fondo */
+}
+
+/* 
+  Fondo blanco detrás del contenido para crear contraste visual 
+*/
+.white-bkg {
+  position: absolute;
+  background: #f6f6f6;
+  inset: 0; /* Ocupa toda la pantalla */
+  z-index: -10; /* Se coloca detrás de los demás elementos */
+}
+
+/* 
+  Efecto de sombra general para resaltar el contenido 
+*/
+.shadow {
+  filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.3));
+}
+
+/* 
+  Contenedor principal con la imagen del teléfono 
+*/
+main {
+  background: url(/img/iphone.webp) no-repeat;
+  background-size: contain;
+  width: 320px;
+  height: 640px;
+  display: flex;
+  position: relative;
+}
+
+/* 
+  Sección que envuelve el contenido principal, incluyendo tarjetas y botones 
+*/
+section {
+  width: 100%;
+  border-radius: 32px; /* Bordes redondeados */
+  display: flex;
+  gap: 24px; /* Espacio entre elementos */
+  flex-direction: column; /* Organización en columna */
+  overflow: hidden;
+  position: relative;
+  padding: 16px 6px;
+  margin: 24px;
+}
+
+/* 
+  Encabezado que contiene el logo de Tinder 
+*/
+header {
+  display: flex;
+  justify-content: start;
+  padding-left: 1rem;
+
+  & img {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+/* 
+  Pie de página con los botones de interacción 
+*/
+footer {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr); /* Distribuye los botones equitativamente */
+  gap: 12px;
+  padding: 0 24px;
+  justify-content: center;
+  align-items: center;
+
+  /* Estilos generales para los botones */
+  & button {
+    background: url("./img/tinder-icons.webp") no-repeat;
+    background-position: 0px 0px;
+    background-size: 175px;
+    height: 32px;
+    width: 32px;
+    border-radius: 50%;
+    border: 0;
+    cursor: pointer;
+    transition: scale 0.3s ease; /* Efecto de escala al pasar el cursor */
+
+    &:hover {
+      scale: 1.4;
+    }
+
+    /* Botones más grandes */
+    &.is-big {
+      background-size: 250px;
+      width: 48px;
+      height: 48px;
+    }
+
+    /* Posiciones específicas de los íconos en la imagen de fondo */
+    &.is-undo {
+      background-position: -140px 0;
+    }
+
+    &.is-remove {
+      background-position: -150px 0;
+    }
+
+    &.is-fav {
+      background-position: -50px 0;
+    }
+
+    &.is-star {
+      background-position: -70px 0px;
+    }
+  }
+}
+
+/* 
+  Contenedor de las tarjetas de usuario 
+*/
+.cards {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+
+  /* Mensaje cuando no hay más personas */
+  & > span {
+    display: grid;
+    place-content: center;
+    color: #777;
+    font-size: 14px;
+    text-align: center;
+    height: 100%;
+    z-index: -1;
+  }
+
+  /* Estilos de cada tarjeta */
+  & article {
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    cursor: grab; /* Indica que se puede arrastrar */
+    overflow: hidden;
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2; /* Se apilan unas sobre otras */
+
+    /* Animaciones para descartar las tarjetas */
+    &.go-left {
+      transform: translateX(-150%) rotate(-30deg) !important;
+    }
+
+    &.go-right {
+      transform: translateX(150%) rotate(30deg) !important;
+    }
+
+    &.go-left,
+    &.go-right {
+      transition: transform 0.3s ease, rotate 0.3s ease;
+    }
+
+    /* Reiniciar posición */
+    &.reset {
+      transition: transform 0.3s ease;
+      transform: translateX(0) !important;
+    }
+
+    /* Indicadores de decisión (LIKE o NOPE) */
+    & .choice {
+      border-radius: 8px;
+      color: black;
+      border: 4px solid;
+      z-index: 9999;
+      position: absolute;
+      top: 32px;
+      right: 16px;
+      opacity: 0; /* Ocultos por defecto */
+      padding: 4px 8px;
+      font-size: 24px;
+      font-weight: bold;
+      text-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+      width: fit-content;
+
+      /* Color rojo para rechazar */
+      &.nope {
+        border-color: #ff6e63;
+        color: #ff6e63;
+        transform: rotate(30deg);
+      }
+
+      /* Color verde para aceptar */
+      &.like {
+        border-color: #63ff68;
+        color: #63ff68;
+        left: 16px;
+        transform: rotate(-30deg);
+      }
+    }
+
+    /* Imagen de perfil dentro de la tarjeta */
+    & img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover; /* Asegura que la imagen cubra el espacio */
+    }
+
+    /* Nombre y edad del usuario */
+    & h2 {
+      color: white;
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: last baseline;
+      height: 100%;
+      width: 100%;
+      padding: 16px;
+      z-index: 3;
+      background: linear-gradient(to top, #00000088 20%, transparent 40%);
+    }
+
+    /* Estilos del número de edad */
+    & span {
+      margin-left: 6px;
+      font-size: 18px;
+      font-weight: 400;
+    }
+  }
+}
